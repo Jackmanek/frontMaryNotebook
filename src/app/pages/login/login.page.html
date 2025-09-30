@@ -1,0 +1,69 @@
+<ion-content class="login-content">
+  <div class="login-container">
+    <div class="login-header">
+      <h1 class="login-title">Bienvenida</h1>
+      <p class="login-subtitle">Ingresa a tu diario de recuerdos</p>
+    </div>
+
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <ion-input
+          type="email"
+          [(ngModel)]="loginData.email"
+          name="email"
+          placeholder="tu@email.com"
+          class="custom-input"
+          [disabled]="isLoading"
+        ></ion-input>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Contraseña</label>
+        <div class="password-wrapper">
+          <ion-input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="loginData.password"
+            name="password"
+            placeholder="••••••••"
+            class="custom-input"
+            [disabled]="isLoading"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            class="password-toggle"
+            (click)="togglePasswordVisibility()"
+            type="button"
+          >
+            <ion-icon
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="login-button"
+        [disabled]="isLoading"
+      >
+        <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        <span *ngIf="!isLoading">Iniciar sesión</span>
+      </ion-button>
+    </form>
+
+    <div class="register-link">
+      <p>¿No tienes cuenta?</p>
+      <ion-button fill="clear" (click)="goToRegister()" [disabled]="isLoading">
+        Crear cuenta
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

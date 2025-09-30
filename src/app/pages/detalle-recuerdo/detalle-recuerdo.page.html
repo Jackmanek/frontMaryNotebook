@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volver()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editarRecuerdo()">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="confirmarEliminar()" color="danger">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   Loading
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+   Contenido del recuerdo
+  <div class="detalle-container" *ngIf="!isLoading && recuerdo">
+    <div class="recuerdo-header">
+      <div class="fecha">{{ formatearFecha(recuerdo.fecha) }}</div>
+    </div>
+
+    <div class="recuerdo-imagen" *ngIf="recuerdo.imagen">
+      <img [src]="recuerdo.imagen" [alt]="'Imagen del recuerdo'" />
+    </div>
+
+    <div class="recuerdo-contenido">
+      <p class="texto">{{ recuerdo.texto }}</p>
+    </div>
+
+    <div class="recuerdo-etiquetas" *ngIf="recuerdo.etiquetas && recuerdo.etiquetas.length > 0">
+      <span class="etiqueta" *ngFor="let etiqueta of recuerdo.etiquetas">
+        #{{ etiqueta.nombre }}
+      </span>
+    </div>
+  </div>
+</ion-content>

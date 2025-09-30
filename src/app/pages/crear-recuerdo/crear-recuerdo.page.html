@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volver()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nuevo Recuerdo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="crear-container">
+    <form (ngSubmit)="crearRecuerdo()">
+       Área de texto
+      <div class="form-group">
+        <label for="texto">¿Qué quieres recordar?</label>
+        <ion-textarea
+          id="texto"
+          [(ngModel)]="texto"
+          name="texto"
+          placeholder="Escribe tu recuerdo aquí..."
+          [autoGrow]="true"
+          rows="6"
+          maxlength="2000"
+          required>
+        </ion-textarea>
+        <div class="char-count">{{ texto.length }}/2000</div>
+      </div>
+
+       Imagen
+      <div class="form-group">
+        <label>Imagen (opcional)</label>
+
+        <div class="image-upload" *ngIf="!imagenPreview">
+          <input
+            type="file"
+            id="imagen"
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            hidden>
+          <label for="imagen" class="upload-button">
+            <ion-icon name="image-outline"></ion-icon>
+            <span>Seleccionar imagen</span>
+          </label>
+        </div>
+
+        <div class="image-preview" *ngIf="imagenPreview">
+          <img [src]="imagenPreview" alt="Preview" />
+          <ion-button
+            fill="clear"
+            class="remove-image"
+            (click)="eliminarImagen()">
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+       Etiquetas
+      <div class="form-group">
+        <label for="etiquetas">Etiquetas (opcional)</label>
+        <ion-input
+          id="etiquetas"
+          [(ngModel)]="etiquetasInput"
+          name="etiquetas"
+          placeholder="amor, viaje, cumpleaños..."
+          type="text">
+        </ion-input>
+        <div class="help-text">Separa las etiquetas con comas</div>
+      </div>
+
+       Error message
+      <ion-text color="danger" *ngIf="errorMessage">
+        <p class="error-message">{{ errorMessage }}</p>
+      </ion-text>
+
+       Botón de envío
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="isLoading || !texto.trim()">
+        <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        <span *ngIf="!isLoading">Guardar Recuerdo</span>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

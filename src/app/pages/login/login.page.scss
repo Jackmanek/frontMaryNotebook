@@ -1,0 +1,159 @@
+.login-content {
+  --background: var(--ion-color-background);
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.login-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: var(--ion-color-medium);
+  margin: 0;
+  font-weight: 400;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ion-color-dark);
+  margin-left: 0.25rem;
+}
+
+.custom-input {
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-dark);
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 0.875rem;
+  --padding-bottom: 0.875rem;
+  --border-radius: 12px;
+  font-size: 1rem;
+
+  &::part(native) {
+    border-radius: 12px;
+  }
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  ion-input {
+    flex: 1;
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 0.25rem;
+    --color: var(--ion-color-medium);
+    --padding-start: 0.5rem;
+    --padding-end: 0.5rem;
+    height: 2.5rem;
+
+    ion-icon {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(var(--ion-color-danger-rgb), 0.1);
+  border-radius: 8px;
+  color: var(--ion-color-danger);
+  font-size: 0.875rem;
+
+  ion-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+}
+
+.login-button {
+  --background: var(--ion-color-secondary);
+  --background-hover: var(--ion-color-secondary-shade);
+  --background-activated: var(--ion-color-secondary-shade);
+  --color: white;
+  --border-radius: 12px;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  text-transform: none;
+  letter-spacing: 0.02em;
+
+  ion-spinner {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 2rem;
+
+  p {
+    font-size: 0.875rem;
+    color: var(--ion-color-medium);
+    margin: 0 0 0.25rem 0;
+  }
+
+  ion-button {
+    --color: var(--ion-color-primary);
+    font-weight: 600;
+    text-transform: none;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    padding: 3rem 2rem;
+  }
+
+  .login-title {
+    font-size: 3rem;
+  }
+
+  .login-subtitle {
+    font-size: 1.125rem;
+  }
+}
