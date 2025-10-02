@@ -26,6 +26,8 @@ import {
   closeCircle,
   eyeOutline,
   arrowBackOutline,
+  trashOutline,
+  createOutline
 } from "ionicons/icons"
 
 @Injectable({
@@ -46,7 +48,9 @@ export class IconService {
       calendar: calendar,
       "image-outline": imageOutline,
       camera: camera,
+      "trash-outline": trashOutline,
       close: close,
+      "create-outline": createOutline,
       "close-circle": closeCircle,
       create: create,
       eye: eye,

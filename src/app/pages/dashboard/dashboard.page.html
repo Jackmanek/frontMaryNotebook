@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="irAHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="crearRecuerdo()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="dashboard-container">
+     Filtro de etiquetas
+    <div class="filter-section" *ngIf="filtroEtiqueta">
+      <div class="filter-chip">
+        <span>{{ filtroEtiqueta }}</span>
+        <ion-icon name="close-circle" (click)="limpiarFiltro()"></ion-icon>
+      </div>
+    </div>
+
+     Timeline de mis recuerdos
+    <div class="timeline">
+      <div class="timeline-item" *ngFor="let recuerdo of recuerdos">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="recuerdo-card" (click)="verDetalle(recuerdo.id)">
+            <div class="recuerdo-header">
+              <div class="recuerdo-fecha">{{ formatearFecha(recuerdo.fecha) }}</div>
+              <div class="recuerdo-actions">
+                <ion-badge [color]="recuerdo.visibilidad === Visibilidad.PUBLICO ? 'success' : 'medium'">
+                  {{ recuerdo.visibilidad === Visibilidad.PUBLICO ? 'Público' : 'Privado' }}
+                </ion-badge>
+                <ion-button fill="clear" size="small" (click)="editarRecuerdo(recuerdo.id, $event)">
+                  <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" size="small" color="danger" (click)="eliminarRecuerdo(recuerdo.id, $event)">
+                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+
+            <div class="recuerdo-imagen" *ngIf="recuerdo.imagen">
+              <img [src]="recuerdo.imagen" [alt]="'Imagen del recuerdo'" />
+            </div>
+
+            <div class="recuerdo-texto">{{ recuerdo.texto }}</div>
+
+            <div class="recuerdo-etiquetas" *ngIf="recuerdo.etiquetas && recuerdo.etiquetas.length > 0">
+              <span
+                class="etiqueta"
+                *ngFor="let etiqueta of recuerdo.etiquetas"
+                (click)="filtrarPorEtiqueta(etiqueta); $event.stopPropagation()">
+                #{{ etiqueta }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     Estado vacío
+    <div class="empty-state" *ngIf="!isLoading && recuerdos.length === 0">
+      <ion-icon name="heart-outline"></ion-icon>
+      <h2>No tienes recuerdos aún</h2>
+      <p>Comienza a crear tus momentos especiales</p>
+      <ion-button (click)="crearRecuerdo()">Crear primer recuerdo</ion-button>
+    </div>
+
+     Infinite scroll
+    <ion-infinite-scroll
+      threshold="100px"
+      (ionInfinite)="loadMore($event)"
+      [disabled]="!hasMore">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Cargando más recuerdos...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

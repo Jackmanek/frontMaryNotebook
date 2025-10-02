@@ -32,6 +32,12 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.cargarRecuerdos()
+
+    this.recuerdoService.recuerdoCreado$.subscribe(()=>{
+      this.currentPage = 0;
+      this.recuerdos = [];
+      this.cargarRecuerdos();
+    });
   }
 
   cargarRecuerdos(event?: any) {

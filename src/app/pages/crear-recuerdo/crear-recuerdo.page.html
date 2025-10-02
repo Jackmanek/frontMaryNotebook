@@ -56,6 +56,24 @@
         </div>
       </div>
 
+       Visibilidad
+      <div class="form-group">
+        <label>Visibilidad</label>
+        <ion-segment [(ngModel)]="visibilidad" name="visibilidad">
+          <ion-segment-button [value]="Visibilidad.PRIVADO">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-label>Privado</ion-label>
+          </ion-segment-button>
+          <ion-segment-button [value]="Visibilidad.PUBLICO">
+            <ion-icon name="globe-outline"></ion-icon>
+            <ion-label>Público</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        <div class="help-text">
+          {{ visibilidad === Visibilidad.PUBLICO ? 'Todos podrán ver este recuerdo' : 'Solo tú podrás ver este recuerdo' }}
+        </div>
+      </div>
+
        Etiquetas
       <div class="form-group">
         <label for="etiquetas">Etiquetas (opcional)</label>

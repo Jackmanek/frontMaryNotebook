@@ -2,8 +2,9 @@ import { Component } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { IonicModule } from "@ionic/angular"
-import { Router } from "@angular/router"
-import { RecuerdoService } from "../../services/recuerdo.service"
+import type { Router } from "@angular/router"
+import type { RecuerdoService } from "../../services/recuerdo.service"
+import { Visibilidad } from "../../models/visibilidad.enum"
 
 @Component({
   selector: "app-crear-recuerdo",
@@ -19,6 +20,9 @@ export default class CrearRecuerdoPage {
   imagenPreview: string | null = null
   isLoading = false
   errorMessage = ""
+  visibilidad: Visibilidad = Visibilidad.PRIVADO
+
+  Visibilidad = Visibilidad
 
   constructor(
     private recuerdoService: RecuerdoService,
@@ -63,20 +67,22 @@ export default class CrearRecuerdoPage {
       .map((e) => e.trim())
       .filter((e) => e.length > 0)
 
-    this.recuerdoService.crearRecuerdoConImagen(this.texto, etiquetas, this.imagenFile || undefined).subscribe({
-      next: () => {
-        this.isLoading = false
-        this.router.navigate(["/home"])
-      },
-      error: (error) => {
-        console.error("Error al crear recuerdo:", error)
-        this.errorMessage = "Error al crear el recuerdo. Intenta de nuevo."
-        this.isLoading = false
-      },
-    })
+    this.recuerdoService
+      .crearRecuerdoConImagen(this.texto, etiquetas, this.visibilidad, this.imagenFile || undefined)
+      .subscribe({
+        next: () => {
+          this.isLoading = false
+          this.router.navigate(["/dashboard"])
+        },
+        error: (error) => {
+          console.error("Error al crear recuerdo:", error)
+          this.errorMessage = "Error al crear el recuerdo. Intenta de nuevo."
+          this.isLoading = false
+        },
+      })
   }
 
   volver() {
-    this.router.navigate(["/home"])
+    this.router.navigate(["/dashboard"])
   }
 }
