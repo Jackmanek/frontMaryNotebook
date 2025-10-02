@@ -1,10 +1,11 @@
-import { inject, Injectable } from "@angular/core"
-import {  HttpClient, HttpParams } from "@angular/common/http"
-import  { Observable, Subject } from "rxjs"
+import { Injectable } from "@angular/core"
+import { type HttpClient, HttpParams } from "@angular/common/http"
+import type { Observable } from "rxjs"
 import { environment } from "../../environments/environment"
-import  { Recuerdo } from "../models/recuerdo.model"
-import  { RecuerdoTimelineDTO } from "../models/recuerdo-timeline-dto.model"
-import  { RecuerdoCreateDTO } from "../models/recuerdo-create-dto.model"
+import type { Recuerdo } from "../models/recuerdo.model"
+import type { RecuerdoTimelineDTO } from "../models/recuerdo-timeline-dto.model"
+import type { RecuerdoCreateDTO } from "../models/recuerdo-create-dto.model"
+import type { Visibilidad } from "../models/visibilidad.enum"
 
 export interface PageResponse<T> {
   content: T[]
@@ -18,20 +19,23 @@ export interface PageResponse<T> {
   providedIn: "root",
 })
 export class RecuerdoService {
-  private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/recuerdos`
-  private recuerdoCreadoSource = new Subject<void>();
-  recuerdoCreado$ = this.recuerdoCreadoSource.asObservable();
-  constructor() {}
+
+  constructor(private http: HttpClient) {}
 
   crearRecuerdo(recuerdo: RecuerdoCreateDTO): Observable<Recuerdo> {
     return this.http.post<Recuerdo>(this.apiUrl, recuerdo)
   }
 
-  crearRecuerdoConImagen(texto: string, etiquetas: string[], imagen?: File): Observable<Recuerdo> {
-    console.log('RecuerdoService: llamando a crearRecuerdoConImagen');
+  crearRecuerdoConImagen(
+    texto: string,
+    etiquetas: string[],
+    visibilidad: Visibilidad,
+    imagen?: File,
+  ): Observable<Recuerdo> {
     const formData = new FormData()
     formData.append("texto", texto)
+    formData.append("visibilidad", visibilidad)
 
     if (etiquetas && etiquetas.length > 0) {
       etiquetas.forEach((etiqueta) => {
@@ -63,7 +67,7 @@ export class RecuerdoService {
     if (etiqueta) {
       params = params.set("etiqueta", etiqueta)
     }
-    return this.http.get<RecuerdoTimelineDTO[]>(`${this.apiUrl}/timeline/simple`, { withCredentials: true })
+    return this.http.get<RecuerdoTimelineDTO[]>(`${this.apiUrl}/timeline/simple`, { params })
   }
 
   obtenerTimelinePaginado(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
@@ -76,9 +80,16 @@ export class RecuerdoService {
     return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/timeline`, { params })
   }
 
-  actualizarRecuerdo(id: number, texto: string, etiquetas: string[], imagen?: File): Observable<Recuerdo> {
+  actualizarRecuerdo(
+    id: number,
+    texto: string,
+    etiquetas: string[],
+    visibilidad: Visibilidad,
+    imagen?: File,
+  ): Observable<Recuerdo> {
     const formData = new FormData()
     formData.append("texto", texto)
+    formData.append("visibilidad", visibilidad)
 
     if (etiquetas && etiquetas.length > 0) {
       etiquetas.forEach((etiqueta) => {
@@ -101,7 +112,23 @@ export class RecuerdoService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`)
   }
 
-  notificarRecuerdoCreado() {
-    this.recuerdoCreadoSource.next();
+  obtenerMisRecuerdos(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
+    let params = new HttpParams().set("page", page.toString()).set("size", size.toString())
+
+    if (etiqueta) {
+      params = params.set("etiqueta", etiqueta)
+    }
+
+    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/mis-recuerdos`, { params })
+  }
+
+  obtenerRecuerdosPublicos(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
+    let params = new HttpParams().set("page", page.toString()).set("size", size.toString())
+
+    if (etiqueta) {
+      params = params.set("etiqueta", etiqueta)
+    }
+
+    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/publicos`, { params })
   }
 }

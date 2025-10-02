@@ -1,27 +1,32 @@
-import { Routes } from '@angular/router';
-import { noAuthGuard } from './guard/no-auth.guard';
-import { authGuard } from './guard/auth.guard';
+import type { Routes } from "@angular/router"
+import { authGuard } from "./guard/auth.guard"
+import { noAuthGuard } from "./guard/no-auth.guard"
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full",
   },
   {
     path: "login",
     canActivate: [noAuthGuard],
-    loadComponent: () => import("./pages/login/login.page").then((m)=>m.default),
+    loadComponent: () => import("./pages/login/login.page").then((m) => m.default),
   },
   {
     path: "register",
     canActivate: [noAuthGuard],
-    loadComponent: () => import("./pages/register/register.page").then((m)=>m.default),
+    loadComponent: () => import("./pages/register/register.page").then((m) => m.default),
   },
   {
     path: "home",
     canActivate: [authGuard],
     loadComponent: () => import("./pages/home/home.page").then((m) => m.default),
+  },
+  {
+    path: "dashboard",
+    canActivate: [authGuard],
+    loadComponent: () => import("./pages/dashboard/dashboard.page").then((m) => m.default),
   },
   {
     path: "crear-recuerdo",
@@ -38,6 +43,6 @@ const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import("./pages/editar-recuerdo/editar-recuerdo.page").then((m) => m.default),
   },
-];
+]
 
 export { routes }

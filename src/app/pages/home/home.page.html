@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Mis Recuerdos</ion-title>
+    <ion-title>Recuerdos Públicos</ion-title>
     <ion-buttons slot="end">
+      <ion-button (click)="irADashboard()">
+        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="crearRecuerdo()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
@@ -56,9 +59,9 @@
      Estado vacío
     <div class="empty-state" *ngIf="!isLoading && recuerdos.length === 0">
       <ion-icon name="heart-outline"></ion-icon>
-      <h2>No hay recuerdos aún</h2>
-      <p>Comienza a crear tus momentos especiales</p>
-      <ion-button (click)="crearRecuerdo()">Crear primer recuerdo</ion-button>
+      <h2>No hay recuerdos públicos aún</h2>
+      <p>Sé el primero en compartir un momento especial</p>
+      <ion-button (click)="crearRecuerdo()">Crear recuerdo público</ion-button>
     </div>
 
      Infinite scroll

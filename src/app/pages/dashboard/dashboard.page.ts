@@ -5,15 +5,16 @@ import type { Router } from "@angular/router"
 import type { RecuerdoService } from "../../services/recuerdo.service"
 import type { AuthService } from "../../services/auth.service"
 import type { RecuerdoTimelineDTO } from "../../models/recuerdo-timeline-dto.model"
+import { Visibilidad } from "../../models/visibilidad.enum"
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.page.html",
-  styleUrls: ["./home.page.scss"],
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.page.html",
+  styleUrls: ["./dashboard.page.scss"],
   standalone: true,
   imports: [CommonModule, IonicModule],
 })
-export class HomePage implements OnInit {
+export class DashboardPage implements OnInit {
   recuerdos: RecuerdoTimelineDTO[] = []
   filtroEtiqueta = ""
   isLoading = false
@@ -24,6 +25,9 @@ export class HomePage implements OnInit {
   totalPages = 0
   hasMore = true
 
+  // Enum para usar en template
+  Visibilidad = Visibilidad
+
   constructor(
     private recuerdoService: RecuerdoService,
     private authService: AuthService,
@@ -31,14 +35,14 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cargarRecuerdos()
+    this.cargarMisRecuerdos()
   }
 
-  cargarRecuerdos(event?: any) {
+  cargarMisRecuerdos(event?: any) {
     this.isLoading = true
 
     this.recuerdoService
-      .obtenerRecuerdosPublicos(this.currentPage, this.pageSize, this.filtroEtiqueta || undefined)
+      .obtenerMisRecuerdos(this.currentPage, this.pageSize, this.filtroEtiqueta || undefined)
       .subscribe({
         next: (response) => {
           if (event) {
@@ -55,7 +59,7 @@ export class HomePage implements OnInit {
           this.isLoading = false
         },
         error: (error) => {
-          console.error("Error al cargar recuerdos:", error)
+          console.error("Error al cargar mis recuerdos:", error)
           this.isLoading = false
           if (event) {
             event.target.complete()
@@ -66,25 +70,47 @@ export class HomePage implements OnInit {
 
   loadMore(event: any) {
     this.currentPage++
-    this.cargarRecuerdos(event)
+    this.cargarMisRecuerdos(event)
   }
 
   filtrarPorEtiqueta(etiqueta: string) {
     this.filtroEtiqueta = etiqueta
     this.currentPage = 0
     this.recuerdos = []
-    this.cargarRecuerdos()
+    this.cargarMisRecuerdos()
   }
 
   limpiarFiltro() {
     this.filtroEtiqueta = ""
     this.currentPage = 0
     this.recuerdos = []
-    this.cargarRecuerdos()
+    this.cargarMisRecuerdos()
   }
 
   verDetalle(id: number) {
     this.router.navigate(["/recuerdo", id])
+  }
+
+  editarRecuerdo(id: number, event: Event) {
+    event.stopPropagation()
+    this.router.navigate(["/editar-recuerdo", id])
+  }
+
+  async eliminarRecuerdo(id: number, event: Event) {
+    event.stopPropagation()
+
+    const confirmacion = confirm("¿Estás seguro de que quieres eliminar este recuerdo?")
+    if (!confirmacion) return
+
+    this.recuerdoService.eliminarRecuerdo(id).subscribe({
+      next: () => {
+        this.recuerdos = this.recuerdos.filter((r) => r.id !== id)
+      },
+      error: (error) => {
+        console.error("Error al eliminar recuerdo:", error)
+        alert("Error al eliminar el recuerdo")
+      },
+    })
   }
 
   crearRecuerdo() {
@@ -94,7 +120,7 @@ export class HomePage implements OnInit {
   doRefresh(event: any) {
     this.currentPage = 0
     this.recuerdos = []
-    this.cargarRecuerdos()
+    this.cargarMisRecuerdos()
     setTimeout(() => {
       event.target.complete()
     }, 1000)
@@ -115,9 +141,9 @@ export class HomePage implements OnInit {
     this.router.navigate(["/login"])
   }
 
-  irADashboard() {
-    this.router.navigate(["/dashboard"])
+  irAHome() {
+    this.router.navigate(["/home"])
   }
 }
 
-export default HomePage
+export default DashboardPage

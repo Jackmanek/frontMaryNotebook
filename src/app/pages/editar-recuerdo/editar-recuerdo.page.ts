@@ -1,9 +1,10 @@
-import { Component,  OnInit } from "@angular/core"
+import { Component, type OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
-import { IonicModule,  AlertController } from "@ionic/angular"
-import  { ActivatedRoute, Router } from "@angular/router"
-import  { RecuerdoService } from "../../services/recuerdo.service"
+import { IonicModule, type AlertController } from "@ionic/angular"
+import type { ActivatedRoute, Router } from "@angular/router"
+import type { RecuerdoService } from "../../services/recuerdo.service"
+import { Visibilidad } from "../../models/visibilidad.enum"
 
 @Component({
   selector: "app-editar-recuerdo",
@@ -21,6 +22,9 @@ export default class EditarRecuerdoPage implements OnInit {
   imagenActual: string | null = null
   isLoading = false
   errorMessage = ""
+  visibilidad: Visibilidad = Visibilidad.PRIVADO
+
+  Visibilidad = Visibilidad
 
   constructor(
     private route: ActivatedRoute,
@@ -45,12 +49,13 @@ export default class EditarRecuerdoPage implements OnInit {
         this.etiquetasInput = recuerdo.etiquetas.map((e) => e.nombre).join(", ")
         this.imagenActual = recuerdo.imagen || null
         this.imagenPreview = recuerdo.imagen || null
+        this.visibilidad = recuerdo.visibilidad
         this.isLoading = false
       },
       error: (error) => {
         console.error("Error al cargar recuerdo:", error)
         this.isLoading = false
-        this.router.navigate(["/home"])
+        this.router.navigate(["/dashboard"])
       },
     })
   }
@@ -128,7 +133,7 @@ export default class EditarRecuerdoPage implements OnInit {
       .filter((e) => e.length > 0)
 
     this.recuerdoService
-      .actualizarRecuerdo(this.recuerdoId, this.texto, etiquetas, this.imagenFile || undefined)
+      .actualizarRecuerdo(this.recuerdoId, this.texto, etiquetas, this.visibilidad, this.imagenFile || undefined)
       .subscribe({
         next: () => {
           this.isLoading = false
