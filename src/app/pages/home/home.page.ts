@@ -1,10 +1,10 @@
-import { Component, type OnInit } from "@angular/core"
+import { Component,  OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { IonicModule } from "@ionic/angular"
-import type { Router } from "@angular/router"
-import type { RecuerdoService } from "../../services/recuerdo.service"
-import type { AuthService } from "../../services/auth.service"
-import type { RecuerdoTimelineDTO } from "../../models/recuerdo-timeline-dto.model"
+import  { Router } from "@angular/router"
+import  { RecuerdoService } from "../../services/recuerdo.service"
+import  { AuthService } from "../../services/auth.service"
+import  { RecuerdoTimelineDTO } from "../../models/recuerdo-timeline-dto.model"
 
 @Component({
   selector: "app-home",
@@ -32,24 +32,27 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.cargarRecuerdos()
+
   }
 
   cargarRecuerdos(event?: any) {
+
     this.isLoading = true
 
     this.recuerdoService
       .obtenerRecuerdosPublicos(this.currentPage, this.pageSize, this.filtroEtiqueta || undefined)
       .subscribe({
         next: (response) => {
+          console.log("Respuesta API:", response);
           if (event) {
             // Infinite scroll
-            this.recuerdos = [...this.recuerdos, ...response.content]
+            this.recuerdos = [...this.recuerdos, ...(response.content ?? [])]
             event.target.complete()
           } else {
             // Primera carga o refresh
-            this.recuerdos = response.content
+            this.recuerdos = response.content ?? []
           }
-
+          console.log("Recuerdos que llegan:", this.recuerdos);
           this.totalPages = response.totalPages
           this.hasMore = this.currentPage < response.totalPages - 1
           this.isLoading = false
@@ -62,6 +65,7 @@ export class HomePage implements OnInit {
           }
         },
       })
+
   }
 
   loadMore(event: any) {

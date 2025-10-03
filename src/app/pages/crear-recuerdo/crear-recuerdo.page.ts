@@ -2,8 +2,8 @@ import { Component } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { IonicModule } from "@ionic/angular"
-import type { Router } from "@angular/router"
-import type { RecuerdoService } from "../../services/recuerdo.service"
+import  { Router } from "@angular/router"
+import  { RecuerdoService } from "../../services/recuerdo.service"
 import { Visibilidad } from "../../models/visibilidad.enum"
 
 @Component({

@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core"
-import { type HttpClient, HttpParams } from "@angular/common/http"
-import type { Observable } from "rxjs"
+import {  HttpClient, HttpParams } from "@angular/common/http"
+import  { Observable } from "rxjs"
 import { environment } from "../../environments/environment"
-import type { Recuerdo } from "../models/recuerdo.model"
-import type { RecuerdoTimelineDTO } from "../models/recuerdo-timeline-dto.model"
-import type { RecuerdoCreateDTO } from "../models/recuerdo-create-dto.model"
-import type { Visibilidad } from "../models/visibilidad.enum"
+import  { Recuerdo } from "../models/recuerdo.model"
+import  { RecuerdoTimelineDTO } from "../models/recuerdo-timeline-dto.model"
+import  { RecuerdoCreateDTO } from "../models/recuerdo-create-dto.model"
+import  { Visibilidad } from "../models/visibilidad.enum"
 
 export interface PageResponse<T> {
   content: T[]
@@ -93,7 +93,7 @@ export class RecuerdoService {
 
     if (etiquetas && etiquetas.length > 0) {
       etiquetas.forEach((etiqueta) => {
-        formData.append("etiquetas", etiqueta)
+        formData.append("etiqueta", etiqueta)
       })
     }
 
@@ -119,7 +119,7 @@ export class RecuerdoService {
       params = params.set("etiqueta", etiqueta)
     }
 
-    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/mis-recuerdos`, { params })
+    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/timeline`, { params })
   }
 
   obtenerRecuerdosPublicos(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
@@ -129,6 +129,6 @@ export class RecuerdoService {
       params = params.set("etiqueta", etiqueta)
     }
 
-    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/publicos`, { params })
+    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/publicos/paginado`, { params })
   }
 }

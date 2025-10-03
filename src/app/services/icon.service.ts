@@ -27,7 +27,12 @@ import {
   eyeOutline,
   arrowBackOutline,
   trashOutline,
-  createOutline
+  createOutline,
+  personOutline,
+  homeOutline,
+  alertCircleOutline,
+  globeOutline,
+  lockClosedOutline
 } from "ionicons/icons"
 
 @Injectable({
@@ -41,13 +46,18 @@ export class IconService {
   private registerIcons(): void {
     addIcons({
       "arrow-back-outline": arrowBackOutline,
+      "alert-circle-outline": alertCircleOutline,
       "eye-outline": eyeOutline,
       "log-out-outline": logOutOutline,
       add: add,
+      "lock-closed-outline" : lockClosedOutline,
+      "globe-outline" : globeOutline,
       "arrow-back": arrowBack,
       calendar: calendar,
+      "home-outline": homeOutline,
       "image-outline": imageOutline,
       camera: camera,
+      "person-outline":personOutline,
       "trash-outline": trashOutline,
       close: close,
       "create-outline": createOutline,

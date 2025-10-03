@@ -1,9 +1,9 @@
-import { Component, type OnInit } from "@angular/core"
+import { Component,  OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
-import { IonicModule, type AlertController } from "@ionic/angular"
-import type { ActivatedRoute, Router } from "@angular/router"
-import type { RecuerdoService } from "../../services/recuerdo.service"
+import { IonicModule,  AlertController } from "@ionic/angular"
+import  { ActivatedRoute, Router } from "@angular/router"
+import  { RecuerdoService } from "../../services/recuerdo.service"
 import { Visibilidad } from "../../models/visibilidad.enum"
 
 @Component({
