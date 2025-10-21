@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import {  HttpClient, HttpParams } from "@angular/common/http"
-import  { Observable } from "rxjs"
+import  { Observable, Subject } from "rxjs"
 import { environment } from "../../environments/environment"
 import  { Recuerdo } from "../models/recuerdo.model"
 import  { RecuerdoTimelineDTO } from "../models/recuerdo-timeline-dto.model"
@@ -20,6 +20,9 @@ export interface PageResponse<T> {
 })
 export class RecuerdoService {
   private apiUrl = `${environment.apiUrl}/recuerdos`
+
+  private recuerdoCreadoSource = new Subject<void>();
+  recuerdoCreado$ = this.recuerdoCreadoSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
