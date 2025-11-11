@@ -135,12 +135,20 @@ export class RecuerdoService {
     return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/publicos/paginado`, { params })
   }
 
-  getImagenUrl(nombreArchivo: string | null | undefined): string {
-    if (!nombreArchivo) {
-      return 'assets/placeholder.jpg'; // por si algún recuerdo no tiene imagen
-    }
-    return `${this.apiUrl}/images/${nombreArchivo}`;
+
+getImagenUrl(imagenUrl: string | null | undefined): string {
+  if (!imagenUrl) return 'assets/img/no-image.png'
+
+  // Si ya incluye '/images/', redirigimos al backend base (sin /api/recuerdos)
+  if (imagenUrl.startsWith('/images')) {
+    // Extraemos el dominio base del apiUrl, quitando "/api/recuerdos" si existe
+    const baseUrl = this.apiUrl.replace(/\/api\/recuerdos$/, '')
+    return `${baseUrl}${imagenUrl}`
   }
+
+  // Si no incluye /images/, construimos la ruta completa normal
+  return `${this.apiUrl}/images/${imagenUrl}`
+}
 
 
 }

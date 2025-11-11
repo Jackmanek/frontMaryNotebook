@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
   hasMore = true
 
   constructor(
-    private recuerdoService: RecuerdoService,
+    public recuerdoService: RecuerdoService,
     private authService: AuthService,
     private router: Router,
   ) {}

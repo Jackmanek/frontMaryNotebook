@@ -38,7 +38,7 @@
             <div class="recuerdo-fecha">{{ formatearFecha(recuerdo.fecha) }}</div>
 
             <div class="recuerdo-imagen" *ngIf="recuerdo.imagen">
-              <img [src]="recuerdo.imagen" [alt]="'Imagen del recuerdo'" />
+              <img [src]="recuerdoService.getImagenUrl(recuerdo.imagen)" alt="Recuerdo" />
             </div>
 
             <div class="recuerdo-texto">{{ recuerdo.texto }}</div>
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-     Estado vacío
+
     <div class="empty-state" *ngIf="!isLoading && recuerdos.length === 0">
       <ion-icon name="heart-outline"></ion-icon>
       <h2>No hay recuerdos públicos aún</h2>
@@ -64,7 +64,7 @@
       <ion-button (click)="crearRecuerdo()">Crear recuerdo público</ion-button>
     </div>
 
-     Infinite scroll
+    <br>
     <ion-infinite-scroll
       threshold="100px"
       (ionInfinite)="loadMore($event)"
