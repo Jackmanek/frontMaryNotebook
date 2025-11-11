@@ -134,4 +134,13 @@ export class RecuerdoService {
 
     return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/publicos/paginado`, { params })
   }
+
+  getImagenUrl(nombreArchivo: string | null | undefined): string {
+    if (!nombreArchivo) {
+      return 'assets/placeholder.jpg'; // por si algún recuerdo no tiene imagen
+    }
+    return `${this.apiUrl}/images/${nombreArchivo}`;
+  }
+
+
 }

@@ -53,7 +53,7 @@
             </div>
 
             <div class="recuerdo-imagen" *ngIf="recuerdo.imagen">
-              <img [src]="recuerdo.imagen" [alt]="'Imagen del recuerdo'" />
+              <img [src]="recuerdoService.getImagenUrl(recuerdo.imagen)" [alt]="'Imagen del recuerdo'" />
             </div>
 
             <div class="recuerdo-texto">{{ recuerdo.texto }}</div>

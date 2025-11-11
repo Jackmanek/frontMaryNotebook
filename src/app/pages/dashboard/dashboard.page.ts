@@ -29,7 +29,7 @@ export class DashboardPage implements OnInit {
   Visibilidad = Visibilidad
 
   constructor(
-    private recuerdoService: RecuerdoService,
+    public recuerdoService: RecuerdoService,
     private authService: AuthService,
     private router: Router,
   ) {}

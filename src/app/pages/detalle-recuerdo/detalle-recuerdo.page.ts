@@ -20,7 +20,7 @@ export default class DetalleRecuerdoPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private recuerdoService: RecuerdoService,
+    public recuerdoService: RecuerdoService,
     private alertController: AlertController,
   ) {}
 
