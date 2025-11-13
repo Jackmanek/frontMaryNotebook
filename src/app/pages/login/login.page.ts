@@ -57,6 +57,10 @@ export class LoginPage {
   goToRegister(): void {
     this.router.navigate(["/register"])
   }
+
+  irAHome() {
+    this.router.navigate(["/home"])
+  }
 }
 
 export default LoginPage
