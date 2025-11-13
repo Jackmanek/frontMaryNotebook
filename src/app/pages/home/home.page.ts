@@ -1,4 +1,4 @@
-import { Component,  OnInit } from "@angular/core"
+import { Component,  OnInit, signal } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { IonicModule } from "@ionic/angular"
 import  { Router } from "@angular/router"
@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   recuerdos: RecuerdoTimelineDTO[] = []
   filtroEtiqueta = ""
   isLoading = false
-
+  userName = signal<string>('Cargando...');
   // Paginación
   currentPage = 0
   pageSize = 10
@@ -31,6 +31,9 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const nombre = this.authService.getUsuarioActual();
+    this.userName.set(nombre ?? "Invitado");
+
     this.cargarRecuerdos()
 
     this.recuerdoService.recuerdoCreado$.subscribe(()=>{

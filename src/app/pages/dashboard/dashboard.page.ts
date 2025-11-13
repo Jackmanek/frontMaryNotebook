@@ -36,6 +36,11 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.cargarMisRecuerdos()
+        this.recuerdoService.recuerdoCreado$.subscribe(()=>{
+    this.currentPage = 0;
+    this.recuerdos = [];
+    this.cargarMisRecuerdos();
+    });
   }
 
   cargarMisRecuerdos(event?: any) {

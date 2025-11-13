@@ -5,6 +5,15 @@ import { tap } from "rxjs/operators"
 import { environment } from "../../environments/environment"
 import { RegistroUsuarioDTO } from "../models/registro-usuario-dto.model"
 import { LoginDTO } from "../models/login-dto.model"
+import { jwtDecode } from "jwt-decode";
+
+interface JwtPayload {
+  sub: string;     // normalmente el email o id del usuario
+  nombre?: string; // si en tu token incluyes el nombre
+  email?: string;
+  exp?: number;
+}
+
 
 @Injectable({
   providedIn: "root",
@@ -46,5 +55,20 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken()
+  }
+
+  getUsuarioActual(): string | null{
+
+    const token = this.getToken();
+    if (!token) return null;
+
+    try{
+      const decoded = jwtDecode<JwtPayload> (token);
+      return decoded.nombre || decoded.sub || null;
+
+    }catch(err){
+      console.error("Error al decodificar token", err);
+      return null;
+    }
   }
 }
