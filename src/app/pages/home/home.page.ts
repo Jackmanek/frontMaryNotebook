@@ -43,6 +43,12 @@ export class HomePage implements OnInit {
     });
 
   }
+  ionViewWillEnter() {
+    // Cada vez que vuelves a Home, recarga
+    this.currentPage = 0;
+    this.recuerdos = [];
+    this.cargarRecuerdos();
+  }
 
   cargarRecuerdos(event?: any) {
 

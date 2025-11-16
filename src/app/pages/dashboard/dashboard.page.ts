@@ -42,6 +42,12 @@ export class DashboardPage implements OnInit {
     this.cargarMisRecuerdos();
     });
   }
+  ionViewWillEnter() {
+    // Cada vez que vuelves a Home, recarga
+    this.currentPage = 0;
+    this.recuerdos = [];
+    this.cargarMisRecuerdos();
+  }
 
   cargarMisRecuerdos(event?: any) {
     this.isLoading = true
