@@ -86,7 +86,7 @@ export class RecuerdoService {
   actualizarRecuerdo(
     id: number,
     texto: string,
-    etiquetas: string[],
+    etiquetas: string[] | null,
     visibilidad: Visibilidad,
     imagen?: File,
   ): Observable<Recuerdo> {
@@ -94,10 +94,8 @@ export class RecuerdoService {
     formData.append("texto", texto)
     formData.append("visibilidad", visibilidad)
 
-    if (etiquetas && etiquetas.length > 0) {
-      etiquetas.forEach((etiqueta) => {
-        formData.append("etiqueta", etiqueta)
-      })
+    if (etiquetas !== null) {
+      formData.append("etiquetas", etiquetas.join(","));
     }
 
     if (imagen) {
@@ -136,19 +134,19 @@ export class RecuerdoService {
   }
 
 
-getImagenUrl(imagenUrl: string | null | undefined): string {
-  if (!imagenUrl) return 'assets/img/no-image.png'
+  getImagenUrl(imagenUrl: string | null | undefined): string {
+    if (!imagenUrl) return 'assets/img/no-image.png'
 
-  // Si ya incluye '/images/', redirigimos al backend base (sin /api/recuerdos)
-  if (imagenUrl.startsWith('/images')) {
-    // Extraemos el dominio base del apiUrl, quitando "/api/recuerdos" si existe
-    const baseUrl = this.apiUrl.replace(/\/api\/recuerdos$/, '')
-    return `${baseUrl}${imagenUrl}`
+    // Si ya incluye '/images/', redirigimos al backend base (sin /api/recuerdos)
+    if (imagenUrl.startsWith('/images')) {
+      // Extraemos el dominio base del apiUrl, quitando "/api/recuerdos" si existe
+      const baseUrl = this.apiUrl.replace(/\/api\/recuerdos$/, '')
+      return `${baseUrl}${imagenUrl}`
+    }
+
+    // Si no incluye /images/, construimos la ruta completa normal
+    return `${this.apiUrl}/images/${imagenUrl}`
   }
-
-  // Si no incluye /images/, construimos la ruta completa normal
-  return `${this.apiUrl}/images/${imagenUrl}`
-}
 
 
 }

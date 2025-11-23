@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
   totalPages = 0
   hasMore = true
 
+
   constructor(
     public recuerdoService: RecuerdoService,
     private authService: AuthService,
@@ -89,7 +90,7 @@ export class HomePage implements OnInit {
   }
 
   filtrarPorEtiqueta(etiqueta: string) {
-    this.filtroEtiqueta = etiqueta
+    this.filtroEtiqueta = etiqueta.trim()
     this.currentPage = 0
     this.recuerdos = []
     this.cargarRecuerdos()

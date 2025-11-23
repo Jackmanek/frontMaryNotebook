@@ -113,39 +113,61 @@ export default class EditarRecuerdoPage implements OnInit {
     }
   }
 
-  actualizarRecuerdo() {
-    if (!this.texto.trim()) {
-      this.errorMessage = "El texto del recuerdo es obligatorio"
-      return
-    }
+actualizarRecuerdo() {
+  if (!this.texto.trim()) {
+    this.errorMessage = "El texto del recuerdo es obligatorio";
+    return;
+  }
 
-    if (this.texto.length > 2000) {
-      this.errorMessage = "El texto no puede superar los 2000 caracteres"
-      return
-    }
+  if (this.texto.length > 2000) {
+    this.errorMessage = "El texto no puede superar los 2000 caracteres";
+    return;
+  }
 
-    this.isLoading = true
-    this.errorMessage = ""
+  this.isLoading = true;
+  this.errorMessage = "";
 
-    const etiquetas = this.etiquetasInput
+  let etiquetas: string[] | null;
+
+  // 🔹 Si el usuario escribió algo → procesar etiquetas
+  if (this.etiquetasInput.trim().length > 0) {
+    etiquetas = this.etiquetasInput
       .split(",")
       .map((e) => e.trim())
-      .filter((e) => e.length > 0)
-
-    this.recuerdoService
-      .actualizarRecuerdo(this.recuerdoId, this.texto, etiquetas, this.visibilidad, this.imagenFile || undefined)
-      .subscribe({
-        next: () => {
-          this.isLoading = false
-          this.router.navigate(["/recuerdo", this.recuerdoId])
-        },
-        error: (error) => {
-          console.error("Error al actualizar recuerdo:", error)
-          this.errorMessage = "Error al actualizar el recuerdo. Intenta de nuevo."
-          this.isLoading = false
-        },
-      })
+      .filter((e) => e.length > 0);
   }
+
+  // 🔹 Si no escribió nada → NO modificar etiquetas existentes
+  else if (this.etiquetasInput === "") {
+    etiquetas = null;
+  }
+
+  // 🔹 Si el input existe pero vacío explícitamente (usuario borró todo)
+  else {
+    etiquetas = [];
+  }
+
+  this.recuerdoService
+    .actualizarRecuerdo(
+      this.recuerdoId,
+      this.texto,
+      etiquetas,
+      this.visibilidad,
+      this.imagenFile || undefined
+    )
+    .subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(["/recuerdo", this.recuerdoId]);
+      },
+      error: (error) => {
+        console.error("Error al actualizar recuerdo:", error);
+        this.errorMessage = "Error al actualizar el recuerdo. Intenta de nuevo.";
+        this.isLoading = false;
+      },
+    });
+}
+
 
   volver() {
     this.router.navigate(["/recuerdo", this.recuerdoId])
