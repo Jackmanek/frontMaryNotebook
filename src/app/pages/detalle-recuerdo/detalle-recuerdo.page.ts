@@ -34,10 +34,13 @@ export default class DetalleRecuerdoPage implements OnInit {
 
   cargarRecuerdo() {
     this.isLoading = true
-    this.recuerdoService.obtenerRecuerdo(this.recuerdoId).subscribe({
+    this.recuerdoService
+    .obtenerRecuerdo(this.recuerdoId)
+    .subscribe({
       next: (recuerdo) => {
         this.recuerdo = recuerdo
         this.isLoading = false
+        console.log(recuerdo)
       },
       error: (error) => {
         console.error("Error al cargar recuerdo:", error)

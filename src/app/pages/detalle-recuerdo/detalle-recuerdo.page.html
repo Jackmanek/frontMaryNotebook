@@ -18,12 +18,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-   Loading
   <div class="loading-container" *ngIf="isLoading">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-   Contenido del recuerdo
+  <h5>Contenido del recuerdo</h5>
   <div class="detalle-container" *ngIf="!isLoading && recuerdo">
     <div class="recuerdo-header">
       <div class="fecha">{{ formatearFecha(recuerdo.fecha) }}</div>

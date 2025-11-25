@@ -12,7 +12,6 @@
 <ion-content [fullscreen]="true">
   <div class="editar-container">
     <form (ngSubmit)="actualizarRecuerdo()">
-       Área de texto
       <div class="form-group">
         <label for="texto">Texto del recuerdo</label>
         <ion-textarea
@@ -27,8 +26,6 @@
         </ion-textarea>
         <div class="char-count">{{ texto.length }}/2000</div>
       </div>
-
-       Imagen
       <div class="form-group">
         <label>Imagen (opcional)</label>
 
@@ -55,8 +52,6 @@
           </ion-button>
         </div>
       </div>
-
-       Added visibilidad selector
       <div class="form-group">
         <label>Visibilidad</label>
         <ion-segment [(ngModel)]="visibilidad" name="visibilidad">
@@ -73,8 +68,6 @@
           {{ visibilidad === Visibilidad.PUBLICO ? 'Todos podrán ver este recuerdo' : 'Solo tú podrás ver este recuerdo' }}
         </div>
       </div>
-
-       Etiquetas
       <div class="form-group">
         <label for="etiquetas">Etiquetas (opcional)</label>
         <ion-input
@@ -86,13 +79,9 @@
         </ion-input>
         <div class="help-text">Separa las etiquetas con comas</div>
       </div>
-
-       Error message
       <ion-text color="danger" *ngIf="errorMessage">
         <p class="error-message">{{ errorMessage }}</p>
       </ion-text>
-
-       Botón de envío
       <ion-button
         expand="block"
         type="submit"

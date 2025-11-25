@@ -67,6 +67,7 @@ export class DashboardPage implements OnInit {
           this.totalPages = response.totalPages
           this.hasMore = this.currentPage < response.totalPages - 1
           this.isLoading = false
+          console.log("Esto es recuerdo" + this.recuerdos[0].imagen)
         },
         error: (error) => {
           console.error("Error al cargar mis recuerdos:", error)

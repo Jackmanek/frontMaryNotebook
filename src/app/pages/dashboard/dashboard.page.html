@@ -32,10 +32,10 @@
     </div>
     <h5>Timeline de mis recuerdos</h5>
     <div class="timeline">
-      <div class="timeline-item" *ngFor="let recuerdo of recuerdos">
+      <div class="timeline-item" *ngFor="let recuerdo of recuerdos" (click)="verDetalle(recuerdo.id)">
         <div class="timeline-marker"></div>
         <div class="timeline-content">
-          <div class="recuerdo-card" (click)="verDetalle(recuerdo.id)">
+          <div class="recuerdo-card">
             <div class="recuerdo-header">
               <div class="recuerdo-fecha">{{ formatearFecha(recuerdo.fecha) }}</div>
               <div class="recuerdo-actions">
@@ -52,7 +52,7 @@
             </div>
 
             <div class="recuerdo-imagen" *ngIf="recuerdo.imagen">
-              <img [src]="recuerdoService.getImagenUrl(recuerdo.imagen)" alt="'Imagen del recuerdo'" />
+              <img [src]="recuerdoService.getImagenUrl(recuerdo.imagen)" alt="Recuerdo" />
             </div>
 
             <div class="recuerdo-texto">{{ recuerdo.texto }}</div>

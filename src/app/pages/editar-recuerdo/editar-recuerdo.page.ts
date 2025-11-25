@@ -5,6 +5,7 @@ import { IonicModule,  AlertController } from "@ionic/angular"
 import  { ActivatedRoute, Router } from "@angular/router"
 import  { RecuerdoService } from "../../services/recuerdo.service"
 import { Visibilidad } from "../../models/visibilidad.enum"
+import { Recuerdo } from "src/app/models/recuerdo.model"
 
 @Component({
   selector: "app-editar-recuerdo",
@@ -14,6 +15,7 @@ import { Visibilidad } from "../../models/visibilidad.enum"
   imports: [CommonModule, FormsModule, IonicModule],
 })
 export default class EditarRecuerdoPage implements OnInit {
+  recuerdo: Recuerdo | null = null
   recuerdoId = 0
   texto = ""
   etiquetasInput = ""
@@ -43,20 +45,24 @@ export default class EditarRecuerdoPage implements OnInit {
 
   cargarRecuerdo() {
     this.isLoading = true
-    this.recuerdoService.obtenerRecuerdo(this.recuerdoId).subscribe({
-      next: (recuerdo) => {
-        this.texto = recuerdo.texto
-        this.etiquetasInput = recuerdo.etiquetas.map((e) => e.nombre).join(", ")
-        this.imagenActual = recuerdo.imagen || null
-        this.imagenPreview = recuerdo.imagen || null
-        this.visibilidad = recuerdo.visibilidad
-        this.isLoading = false
-      },
-      error: (error) => {
-        console.error("Error al cargar recuerdo:", error)
-        this.isLoading = false
-        this.router.navigate(["/dashboard"])
-      },
+    this.recuerdoService
+      .obtenerRecuerdo(this.recuerdoId)
+      .subscribe({
+        next: (recuerdo) => {
+          console.log(recuerdo)
+          this.recuerdo = recuerdo
+          this.texto = recuerdo.texto
+          this.etiquetasInput = recuerdo.etiquetas.map((e) => e.nombre).join(", ")
+          this.imagenActual = recuerdo.imagen || null
+          this.imagenPreview = recuerdo.imagen ? this.recuerdoService.getImagenUrl(recuerdo.imagen) : null
+          this.visibilidad = recuerdo.visibilidad
+          this.isLoading = false
+        },
+        error: (error) => {
+          console.error("Error al cargar recuerdo:", error)
+          this.isLoading = false
+          this.router.navigate(["/dashboard"])
+        },
     })
   }
 
