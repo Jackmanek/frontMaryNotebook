@@ -73,16 +73,6 @@ export class RecuerdoService {
     return this.http.get<RecuerdoTimelineDTO[]>(`${this.apiUrl}/timeline/simple`, { params })
   }
 
-  obtenerTimelinePaginado(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
-    let params = new HttpParams().set("page", page.toString()).set("size", size.toString())
-
-    if (etiqueta) {
-      params = params.set("etiqueta", etiqueta)
-    }
-
-    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/timeline`, { params })
-  }
-
   actualizarRecuerdo(
     id: number,
     texto: string,
@@ -114,6 +104,16 @@ export class RecuerdoService {
   }
 
   obtenerMisRecuerdos(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
+    let params = new HttpParams().set("page", page.toString()).set("size", size.toString())
+
+    if (etiqueta) {
+      params = params.set("etiqueta", etiqueta)
+    }
+
+    return this.http.get<PageResponse<RecuerdoTimelineDTO>>(`${this.apiUrl}/timeline`, { params })
+  }
+
+  obtenerTimelinePaginado(page = 0, size = 10, etiqueta?: string): Observable<PageResponse<RecuerdoTimelineDTO>> {
     let params = new HttpParams().set("page", page.toString()).set("size", size.toString())
 
     if (etiqueta) {

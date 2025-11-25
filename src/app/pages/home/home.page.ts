@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
   filtroEtiqueta = ""
   isLoading = false
   userName = signal<string>('Cargando...');
-  // Paginación
   currentPage = 0
   pageSize = 10
   totalPages = 0
@@ -46,20 +45,20 @@ export class HomePage implements OnInit {
   }
   ionViewWillEnter() {
     // Cada vez que vuelves a Home, recarga
+    const nombre = this.authService.getUsuarioActual();
+    this.userName.set(nombre ?? "Invitado");
     this.currentPage = 0;
     this.recuerdos = [];
     this.cargarRecuerdos();
   }
 
   cargarRecuerdos(event?: any) {
-
     this.isLoading = true
 
     this.recuerdoService
       .obtenerRecuerdosPublicos(this.currentPage, this.pageSize, this.filtroEtiqueta || undefined)
       .subscribe({
         next: (response) => {
-          console.log("Respuesta API:", response);
           if (event) {
             // Infinite scroll
             this.recuerdos = [...this.recuerdos, ...(response.content ?? [])]
@@ -68,7 +67,6 @@ export class HomePage implements OnInit {
             // Primera carga o refresh
             this.recuerdos = response.content ?? []
           }
-          console.log("Recuerdos que llegan:", this.recuerdos);
           this.totalPages = response.totalPages
           this.hasMore = this.currentPage < response.totalPages - 1
           this.isLoading = false
@@ -90,7 +88,7 @@ export class HomePage implements OnInit {
   }
 
   filtrarPorEtiqueta(etiqueta: string) {
-    this.filtroEtiqueta = etiqueta.trim()
+    this.filtroEtiqueta = etiqueta
     this.currentPage = 0
     this.recuerdos = []
     this.cargarRecuerdos()

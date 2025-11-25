@@ -23,15 +23,14 @@
   </ion-refresher>
 
   <div class="dashboard-container">
-     Filtro de etiquetas
     <div class="filter-section" *ngIf="filtroEtiqueta">
+      <h5>Filtro de etiquetas</h5>
       <div class="filter-chip">
         <span>{{ filtroEtiqueta }}</span>
         <ion-icon name="close-circle" (click)="limpiarFiltro()"></ion-icon>
       </div>
     </div>
-
-     Timeline de mis recuerdos
+    <h5>Timeline de mis recuerdos</h5>
     <div class="timeline">
       <div class="timeline-item" *ngFor="let recuerdo of recuerdos">
         <div class="timeline-marker"></div>
@@ -71,7 +70,7 @@
       </div>
     </div>
 
-     Estado vacío
+
     <div class="empty-state" *ngIf="!isLoading && recuerdos.length === 0">
       <ion-icon name="heart-outline"></ion-icon>
       <h2>No tienes recuerdos aún</h2>
@@ -79,7 +78,7 @@
       <ion-button (click)="crearRecuerdo()">Crear primer recuerdo</ion-button>
     </div>
 
-     Infinite scroll
+
     <ion-infinite-scroll
       threshold="100px"
       (ionInfinite)="loadMore($event)"

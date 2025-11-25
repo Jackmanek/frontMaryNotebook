@@ -49,7 +49,6 @@ export class AuthService {
 
   getToken(): string | null {
     const token = localStorage.getItem("auth_token");
-    console.log("JWT token:", token); // Para confirmar que existe
     return localStorage.getItem("auth_token")
   }
 

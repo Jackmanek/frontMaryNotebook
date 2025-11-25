@@ -36,7 +36,7 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.cargarMisRecuerdos()
-        this.recuerdoService.recuerdoCreado$.subscribe(()=>{
+    this.recuerdoService.recuerdoCreado$.subscribe(()=>{
     this.currentPage = 0;
     this.recuerdos = [];
     this.cargarMisRecuerdos();
@@ -56,7 +56,6 @@ export class DashboardPage implements OnInit {
       .obtenerTimelinePaginado(this.currentPage, this.pageSize, this.filtroEtiqueta || undefined)
       .subscribe({
         next: (response) => {
-          console.log(response)
           if (event) {
             // Infinite scroll
             this.recuerdos = [...this.recuerdos, ...(response.content ?? [])]
@@ -65,7 +64,6 @@ export class DashboardPage implements OnInit {
             // Primera carga o refresh
             this.recuerdos = response.content ?? []
           }
-
           this.totalPages = response.totalPages
           this.hasMore = this.currentPage < response.totalPages - 1
           this.isLoading = false
