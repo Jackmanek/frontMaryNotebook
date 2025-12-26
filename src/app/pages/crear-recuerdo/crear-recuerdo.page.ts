@@ -1,7 +1,27 @@
 import { Component } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
-import { IonicModule } from "@ionic/angular"
+import {
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonTextarea,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  IonText,
+  IonBadge
+} from "@ionic/angular/standalone"
 import  { Router } from "@angular/router"
 import  { RecuerdoService } from "../../services/recuerdo.service"
 import { Visibilidad } from "../../models/visibilidad.enum"
@@ -11,7 +31,28 @@ import { Visibilidad } from "../../models/visibilidad.enum"
   templateUrl: "./crear-recuerdo.page.html",
   styleUrls: ["./crear-recuerdo.page.scss"],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule],
+  imports: [
+  CommonModule,
+  FormsModule,
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonTextarea,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  IonText,
+  IonBadge],
 })
 export default class CrearRecuerdoPage {
   texto = ""

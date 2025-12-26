@@ -1,6 +1,20 @@
 import { Component,  OnInit, signal } from "@angular/core"
 import { CommonModule } from "@angular/common"
-import { IonicModule } from "@ionic/angular"
+import {
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent
+} from "@ionic/angular/standalone"
 import  { Router } from "@angular/router"
 import  { RecuerdoService } from "../../services/recuerdo.service"
 import  { AuthService } from "../../services/auth.service"
@@ -11,7 +25,21 @@ import  { RecuerdoTimelineDTO } from "../../models/recuerdo-timeline-dto.model"
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  CommonModule],
 })
 export class HomePage implements OnInit {
   recuerdos: RecuerdoTimelineDTO[] = []
@@ -70,7 +98,6 @@ export class HomePage implements OnInit {
           this.totalPages = response.totalPages
           this.hasMore = this.currentPage < response.totalPages - 1
           this.isLoading = false
-          console.log("Esto es recuerdo" + this.recuerdos[0].imagen)
         },
         error: (error) => {
           console.error("Error al cargar recuerdos:", error)

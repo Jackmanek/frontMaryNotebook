@@ -1,6 +1,26 @@
 import { Component,  OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
-import { IonicModule } from "@ionic/angular"
+import {
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonTextarea,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  IonText,
+  IonBadge
+} from "@ionic/angular/standalone"
 import  { Router } from "@angular/router"
 import  { RecuerdoService } from "../../services/recuerdo.service"
 import  { AuthService } from "../../services/auth.service"
@@ -12,7 +32,27 @@ import { Visibilidad } from "../../models/visibilidad.enum"
   templateUrl: "./dashboard.page.html",
   styleUrls: ["./dashboard.page.scss"],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [
+  CommonModule,
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonTextarea,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  IonText,
+  IonBadge],
 })
 export class DashboardPage implements OnInit {
   recuerdos: RecuerdoTimelineDTO[] = []

@@ -1,6 +1,26 @@
 import { Component,  OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
-import { IonicModule,  AlertController } from "@ionic/angular"
+import { AlertController } from "@ionic/angular"
+import {
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonTextarea,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  IonText
+} from "@ionic/angular/standalone"
 import { ActivatedRoute, Router } from "@angular/router"
 import { RecuerdoService } from "../../services/recuerdo.service"
 import { Recuerdo } from "../../models/recuerdo.model"
@@ -10,7 +30,26 @@ import { Recuerdo } from "../../models/recuerdo.model"
   templateUrl: "./detalle-recuerdo.page.html",
   styleUrls: ["./detalle-recuerdo.page.scss"],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [
+  CommonModule,
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  IonRefresher,
+  IonRefresherContent,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonTextarea,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  IonText],
 })
 export default class DetalleRecuerdoPage implements OnInit {
   recuerdo: Recuerdo | null = null

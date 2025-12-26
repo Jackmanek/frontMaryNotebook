@@ -2,7 +2,17 @@ import { Component } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { Router } from "@angular/router"
-import { IonicModule } from "@ionic/angular"
+import {
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons
+} from "@ionic/angular/standalone"
 import { AuthService } from "../../services/auth.service"
 import { LoginDTO } from "../../models/login-dto.model"
 
@@ -11,7 +21,18 @@ import { LoginDTO } from "../../models/login-dto.model"
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [
+  IonContent,
+  IonInput,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonIcon,
+  IonSpinner,
+  IonButtons,
+  CommonModule,
+  FormsModule],
 })
 export class LoginPage {
   loginData: LoginDTO = {
