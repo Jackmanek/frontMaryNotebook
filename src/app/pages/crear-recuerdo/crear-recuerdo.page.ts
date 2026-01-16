@@ -70,6 +70,20 @@ export default class CrearRecuerdoPage {
     private router: Router,
   ) {}
 
+  ionViewWillEnter() {
+    this.resetFormulario();
+  }
+
+  resetFormulario() {
+    this.texto = "";
+    this.etiquetasInput = "";
+    this.imagenFile = null;
+    this.imagenPreview = null;
+    this.isLoading = false;
+    this.errorMessage = "";
+    this.visibilidad = Visibilidad.PRIVADO;
+  }
+
   onImageSelected(event: any) {
     const file = event.target.files[0]
     if (file) {
@@ -113,6 +127,7 @@ export default class CrearRecuerdoPage {
       .subscribe({
         next: () => {
           this.isLoading = false
+          this.resetFormulario();
           this.router.navigate(["/dashboard"])
         },
         error: (error) => {
