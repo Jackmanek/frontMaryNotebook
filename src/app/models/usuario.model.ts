@@ -5,4 +5,6 @@ export interface Usuario {
   password?: string
   fechaRegistro: Date
   rol: "USER" | "ADMIN"
+  activo: boolean
+  ultimoAcceso?: string
 }

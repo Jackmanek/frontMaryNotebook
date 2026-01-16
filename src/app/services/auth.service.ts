@@ -6,6 +6,7 @@ import { environment } from "../../environments/environment"
 import { RegistroUsuarioDTO } from "../models/registro-usuario-dto.model"
 import { LoginDTO } from "../models/login-dto.model"
 import { jwtDecode } from "jwt-decode";
+import { Usuario } from "../models/usuario.model"
 
 interface JwtPayload {
   sub: string;     // normalmente el email o id del usuario
@@ -56,14 +57,30 @@ export class AuthService {
     return !!this.getToken()
   }
 
-  getUsuarioActual(): string | null{
+  getUsuarioActual(): Usuario | null{
 
     const token = this.getToken();
     if (!token) return null;
 
     try{
-      const decoded = jwtDecode<JwtPayload> (token);
-      return decoded.nombre || decoded.sub || null;
+      const decoded = jwtDecode<JwtPayload & {rol?: "USER" | "ADMIN"}> (token);
+
+      if(!decoded || (!decoded.sub && !decoded.nombre)){
+        return null;
+      }
+
+      if(!decoded.rol){
+        return null;
+      }
+      return {
+        id: 0, // El ID no está en el token, asignamos 0 o podrías manejarlo de otra forma
+        nombre: decoded.nombre || decoded.sub || "",
+        email: decoded.email || "",
+        rol: decoded.rol,
+        fechaRegistro: new Date(),
+        activo: true,
+        ultimoAcceso: "", // La fecha de registro no está en el token
+      };
 
     }catch(err){
       console.error("Error al decodificar token", err);

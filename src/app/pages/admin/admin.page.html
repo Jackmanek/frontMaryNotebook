@@ -1,0 +1,186 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volverDashboard()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Panel de Administración</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segmentoActivo" (ionChange)="cambiarSegmento($event)">
+      <ion-segment-button value="usuarios">
+        <ion-label>Usuarios</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="contenido">
+        <ion-label>Contenido</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- SECCIÓN DE USUARIOS -->
+  <div class="admin-container" *ngIf="segmentoActivo === 'usuarios'">
+    <ion-searchbar
+      placeholder="Buscar usuarios..."
+      [(ngModel)]="busquedaUsuario"
+      (ionInput)="buscarUsuarios($event)"
+      animated="true">
+    </ion-searchbar>
+
+    <div class="stats-cards">
+      <ion-card>
+        <ion-card-content>
+          <div class="stat-number">{{ usuarios.length }}</div>
+          <div class="stat-label">Total Usuarios</div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <div class="stat-number">{{ (usuarios | filter: 'activo': true).length }}</div>
+          <div class="stat-label">Activos</div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+    <ion-list *ngIf="!isLoading">
+      <ion-item
+        *ngFor="let usuario of usuariosFiltrados"
+        button
+        (click)="verDetalleUsuario(usuario.id)">
+        <ion-avatar slot="start">
+          <div class="avatar-placeholder">
+            {{ usuario.nombre.charAt(0).toUpperCase() }}
+          </div>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ usuario.nombre }}</h2>
+          <p>{{ usuario.email }}</p>
+          <ion-text color="medium">
+            <p>Registrado: {{ formatearFecha(usuario.fechaRegistro) }}</p>
+          </ion-text>
+        </ion-label>
+        <div slot="end" class="usuario-badges">
+          <ion-badge [color]="usuario.rol === 'ADMIN' ? 'danger' : 'primary'">
+            {{ usuario.rol }}
+          </ion-badge>
+          <ion-badge [color]="usuario.activo ? 'success' : 'medium'">
+            {{ usuario.activo ? 'Activo' : 'Inactivo' }}
+          </ion-badge>
+          <ion-button
+            fill="clear"
+            size="small"
+            [color]="usuario.activo ? 'warning' : 'success'"
+            (click)="toggleEstadoUsuario(usuario, $event)">
+            <ion-icon
+              slot="icon-only"
+              [name]="usuario.activo ? 'lock-closed-outline' : 'lock-open-outline'">
+            </ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div class="empty-state" *ngIf="!isLoading && usuariosFiltrados.length === 0">
+      <ion-icon name="people-outline"></ion-icon>
+      <h2>No se encontraron usuarios</h2>
+      <p>Intenta con otros términos de búsqueda</p>
+    </div>
+  </div>
+
+  <!-- SECCIÓN DE CONTENIDO -->
+  <div class="admin-container" *ngIf="segmentoActivo === 'contenido'">
+    <ion-searchbar
+      placeholder="Buscar contenido..."
+      [(ngModel)]="busquedaContenido"
+      (ionInput)="buscarContenido($event)"
+      animated="true">
+    </ion-searchbar>
+
+    <div class="stats-cards">
+      <ion-card>
+        <ion-card-content>
+          <div class="stat-number">{{ todosRecuerdos.length }}</div>
+          <div class="stat-label">Total Recuerdos</div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <div class="stat-number">
+            {{ (todosRecuerdos | filter: 'visibilidad': Visibilidad.PUBLICO).length }}
+          </div>
+          <div class="stat-label">Públicos</div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+    <div class="recuerdos-grid" *ngIf="!isLoading">
+      <ion-card
+        *ngFor="let recuerdo of recuerdosFiltrados"
+        button
+        (click)="verDetalleRecuerdo(recuerdo.id)">
+        <div class="recuerdo-imagen" *ngIf="recuerdo.imagen">
+          <img [src]="recuerdoService.getImagenUrl(recuerdo.imagen)" alt="Recuerdo" />
+        </div>
+
+        <ion-card-header>
+          <div class="recuerdo-meta">
+            <ion-badge [color]="recuerdo.visibilidad === Visibilidad.PUBLICO ? 'success' : 'medium'">
+              {{ recuerdo.visibilidad === Visibilidad.PUBLICO ? 'Público' : 'Privado' }}
+            </ion-badge>
+            <ion-text color="medium">
+              <small>{{ formatearFecha(recuerdo.fecha) }}</small>
+            </ion-text>
+          </div>
+          <ion-card-title>
+            <ion-text color="primary">
+              <small>@{{ recuerdo.nombreUsuario }}</small>
+            </ion-text>
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p class="recuerdo-texto-preview">{{ recuerdo.texto }}</p>
+
+          <div class="recuerdo-etiquetas" *ngIf="recuerdo.etiquetas && recuerdo.etiquetas.length > 0">
+            <span class="etiqueta" *ngFor="let etiqueta of recuerdo.etiquetas">
+              #{{ etiqueta }}
+            </span>
+          </div>
+
+          <div class="recuerdo-acciones">
+            <ion-button
+              fill="clear"
+              size="small"
+              color="danger"
+              (click)="eliminarRecuerdoAdmin(recuerdo.id, $event)">
+              <ion-icon slot="start" name="trash-outline"></ion-icon>
+              Eliminar
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && recuerdosFiltrados.length === 0">
+      <ion-icon name="images-outline"></ion-icon>
+      <h2>No se encontró contenido</h2>
+      <p>Intenta con otros términos de búsqueda</p>
+    </div>
+  </div>
+</ion-content>

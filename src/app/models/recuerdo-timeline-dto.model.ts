@@ -7,6 +7,7 @@ export interface RecuerdoTimelineDTO {
   imagen?: string
   etiquetas: string[]
   visibilidad: Visibilidad
+  nombreUsuario?: string
 }
 
 
