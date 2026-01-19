@@ -4,6 +4,9 @@
   margin: 0 auto;
 }
 
+/* --------------------
+   FORM GROUP
+-------------------- */
 .form-group {
   margin-bottom: 1.5rem;
 
@@ -11,44 +14,38 @@
     display: block;
     font-size: 0.938rem;
     font-weight: 600;
-    color: var(--ion-color-dark);
+    color: var(--ion-text-color);
     margin-bottom: 0.5rem;
   }
 
-  ion-textarea {
-    --background: white;
+  ion-textarea,
+  ion-input {
+    --background: var(--ion-item-background);
+    --color: var(--ion-text-color);
     --border-radius: 12px;
     --padding-start: 1rem;
     --padding-end: 1rem;
     --padding-top: 1rem;
     --padding-bottom: 1rem;
-    border: 1px solid var(--ion-color-light);
-    font-size: 1rem;
-  }
-
-  ion-input {
-    --background: white;
-    --border-radius: 12px;
-    --padding-start: 1rem;
-    --padding-end: 1rem;
-    border: 1px solid var(--ion-color-light);
+    border: 1px solid var(--ion-color-medium);
     font-size: 1rem;
   }
 }
 
-.char-count {
+/* --------------------
+   HELPERS
+-------------------- */
+.char-count,
+.help-text {
   text-align: right;
   font-size: 0.813rem;
   color: var(--ion-color-medium);
   margin-top: 0.25rem;
 }
 
-.help-text {
-  font-size: 0.813rem;
-  color: var(--ion-color-medium);
-  margin-top: 0.25rem;
-}
-
+/* --------------------
+   IMAGE UPLOAD
+-------------------- */
 .image-upload {
   .upload-button {
     display: flex;
@@ -56,15 +53,15 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background: white;
-    border: 2px dashed var(--ion-color-light);
+    background: var(--ion-item-background);
+    border: 2px dashed var(--ion-color-medium);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
       border-color: var(--ion-color-primary);
-      background: var(--ion-color-light);
+      background: rgba(var(--ion-color-primary-rgb), 0.05);
     }
 
     ion-icon {
@@ -80,6 +77,9 @@
   }
 }
 
+/* --------------------
+   IMAGE PREVIEW
+-------------------- */
 .image-preview {
   position: relative;
   border-radius: 12px;
@@ -95,7 +95,7 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    --background: rgba(0, 0, 0, 0.5);
+    --background: rgba(0, 0, 0, 0.6);
     --color: white;
 
     ion-icon {
@@ -104,14 +104,21 @@
   }
 }
 
+/* --------------------
+   ERROR MESSAGE
+-------------------- */
 .error-message {
   margin: 1rem 0;
   padding: 0.75rem;
   background: rgba(var(--ion-color-danger-rgb), 0.1);
   border-radius: 8px;
   font-size: 0.875rem;
+  color: var(--ion-text-color);
 }
 
+/* --------------------
+   SUBMIT BUTTON
+-------------------- */
 ion-button[type="submit"] {
   margin-top: 1.5rem;
   --border-radius: 24px;

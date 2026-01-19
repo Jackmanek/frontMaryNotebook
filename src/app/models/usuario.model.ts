@@ -3,7 +3,7 @@ export interface Usuario {
   nombre: string
   email: string
   password?: string
-  fechaRegistro: Date
+  fechaRegistro: string
   rol: "USER" | "ADMIN"
   activo: boolean
   ultimoAcceso?: string

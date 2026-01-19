@@ -195,6 +195,15 @@ export class DashboardPage implements OnInit {
   irAHome() {
     this.router.navigate(["/home"])
   }
+
+  esAdmin(): boolean {
+  const usuario = this.authService.getUsuarioActual()
+  return usuario?.rol === 'ADMIN'
+}
+
+  irAAdmin() {
+  this.router.navigate(['/admin'])
+}
 }
 
 export default DashboardPage

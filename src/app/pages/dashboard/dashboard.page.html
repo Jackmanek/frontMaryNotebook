@@ -4,6 +4,9 @@
       <ion-button (click)="irAHome()">
         <ion-icon slot="icon-only" name="home-outline"></ion-icon>
       </ion-button>
+            <ion-button *ngIf="esAdmin()" (click)="irAAdmin()">
+        <ion-icon slot="icon-only" name="shield-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Mi Perfil</ion-title>
     <ion-buttons slot="end">

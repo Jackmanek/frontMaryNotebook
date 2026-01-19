@@ -35,3 +35,17 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+ion-input,
+ion-textarea {
+  --color: var(--ion-text-color);
+  --background: var(--ion-item-background);
+  --placeholder-color: var(--ion-placeholder-color);
+}
+
+ion-item {
+  --background: var(--ion-item-background);
+  --color: var(--ion-text-color);
+}
+
+

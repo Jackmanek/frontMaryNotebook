@@ -30,6 +30,7 @@
   margin-bottom: 1.5rem;
   border-radius: 16px;
   overflow: hidden;
+  background: var(--ion-item-background);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   img {
@@ -45,7 +46,7 @@
   .texto {
     font-size: 1.063rem;
     line-height: 1.7;
-    color: var(--ion-color-dark);
+    color: var(--ion-text-color);
     white-space: pre-wrap;
     word-wrap: break-word;
   }
@@ -56,13 +57,13 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--ion-color-light);
+  border-top: 1px solid var(--ion-color-medium);
 }
 
 .etiqueta {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: var(--ion-color-light);
+  background: rgba(var(--ion-color-primary-rgb), 0.12);
   color: var(--ion-color-primary);
   border-radius: 16px;
   font-size: 0.875rem;

@@ -77,7 +77,7 @@ export class AuthService {
         nombre: decoded.nombre || decoded.sub || "",
         email: decoded.email || "",
         rol: decoded.rol,
-        fechaRegistro: new Date(),
+        fechaRegistro: "",
         activo: true,
         ultimoAcceso: "", // La fecha de registro no está en el token
       };

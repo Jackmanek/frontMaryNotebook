@@ -11,27 +11,29 @@
     display: block;
     font-size: 0.938rem;
     font-weight: 600;
-    color: var(--ion-color-dark);
+    color: var(--ion-text-color);
     margin-bottom: 0.5rem;
   }
 
   ion-textarea {
-    --background: white;
+    --background: var(--ion-item-background);
+    --color: var(--ion-text-color);
     --border-radius: 12px;
     --padding-start: 1rem;
     --padding-end: 1rem;
     --padding-top: 1rem;
     --padding-bottom: 1rem;
-    border: 1px solid var(--ion-color-light);
+    border: 1px solid var(--ion-color-medium);
     font-size: 1rem;
   }
 
   ion-input {
-    --background: white;
+    --background: var(--ion-item-background);
+    --color: var(--ion-text-color);
     --border-radius: 12px;
     --padding-start: 1rem;
     --padding-end: 1rem;
-    border: 1px solid var(--ion-color-light);
+    border: 1px solid var(--ion-color-medium);
     font-size: 1rem;
   }
 }
@@ -56,15 +58,15 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background: white;
-    border: 2px dashed var(--ion-color-light);
+    background:  var(--ion-item-background);
+    border: 2px dashed var(--ion-color-medium);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
       border-color: var(--ion-color-primary);
-      background: var(--ion-color-light);
+      background: rgba(var(--ion-color-primary-rgb), 0.05);
     }
 
     ion-icon {
@@ -110,6 +112,7 @@
   background: rgba(var(--ion-color-danger-rgb), 0.1);
   border-radius: 8px;
   font-size: 0.875rem;
+  color: var(--ion-text-color);
 }
 
 ion-button[type="submit"] {

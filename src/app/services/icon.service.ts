@@ -32,7 +32,8 @@ import {
   homeOutline,
   alertCircleOutline,
   globeOutline,
-  lockClosedOutline
+  lockClosedOutline,
+  shieldOutline
 } from "ionicons/icons"
 
 @Injectable({
@@ -63,6 +64,7 @@ export class IconService {
       "create-outline": createOutline,
       "close-circle": closeCircle,
       create: create,
+      "shield-outline": shieldOutline,
       eye: eye,
       "eye-off": eyeOff,
       heart: heart,

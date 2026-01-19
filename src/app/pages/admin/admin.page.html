@@ -14,7 +14,7 @@
   </ion-toolbar>
 
   <ion-toolbar>
-    <ion-segment [(ngModel)]="segmentoActivo" (ionChange)="cambiarSegmento($event)">
+    <ion-segment [value]="segmentoActivo" (ionChange)="cambiarSegmento($event)">
       <ion-segment-button value="usuarios">
         <ion-label>Usuarios</ion-label>
       </ion-segment-button>
@@ -34,7 +34,7 @@
   <div class="admin-container" *ngIf="segmentoActivo === 'usuarios'">
     <ion-searchbar
       placeholder="Buscar usuarios..."
-      [(ngModel)]="busquedaUsuario"
+      [value]="busquedaUsuario"
       (ionInput)="buscarUsuarios($event)"
       animated="true">
     </ion-searchbar>
@@ -48,7 +48,7 @@
       </ion-card>
       <ion-card>
         <ion-card-content>
-          <div class="stat-number">{{ (usuarios | filter: 'activo': true).length }}</div>
+          <div class="stat-number">{{ contarUsuariosActivos() }}</div>
           <div class="stat-label">Activos</div>
         </ion-card-content>
       </ion-card>
@@ -105,7 +105,7 @@
   <div class="admin-container" *ngIf="segmentoActivo === 'contenido'">
     <ion-searchbar
       placeholder="Buscar contenido..."
-      [(ngModel)]="busquedaContenido"
+      [value]="busquedaContenido"
       (ionInput)="buscarContenido($event)"
       animated="true">
     </ion-searchbar>
@@ -120,7 +120,7 @@
       <ion-card>
         <ion-card-content>
           <div class="stat-number">
-            {{ (todosRecuerdos | filter: 'visibilidad': Visibilidad.PUBLICO).length }}
+            {{ contarRecuerdosPublicos() }}
           </div>
           <div class="stat-label">Públicos</div>
         </ion-card-content>

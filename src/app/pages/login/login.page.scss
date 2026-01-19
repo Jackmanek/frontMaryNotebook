@@ -1,5 +1,5 @@
 .login-content {
-  --background: var(--ion-color-background);
+  --background: var(--ion-background-color);
 }
 
 .login-container {
@@ -48,13 +48,13 @@
 .form-label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--ion-color-dark);
+  color: var(--ion-text-color);
   margin-left: 0.25rem;
 }
 
 .custom-input {
-  --background: var(--ion-color-light);
-  --color: var(--ion-color-dark);
+  --background: var(--ion-item-background);
+  --color: var(--ion-text-color);
   --padding-start: 1rem;
   --padding-end: 1rem;
   --padding-top: 0.875rem;

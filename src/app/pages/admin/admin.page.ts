@@ -249,6 +249,14 @@ export class AdminPage implements OnInit {
     this.authService.logout()
     this.router.navigate(['/login'])
   }
+
+  contarUsuariosActivos(): number {
+  return this.usuarios.filter(u => u.activo).length
+}
+
+  contarRecuerdosPublicos(): number {
+  return this.todosRecuerdos.filter(r => r.visibilidad === Visibilidad.PUBLICO).length
+}
 }
 
 export default AdminPage

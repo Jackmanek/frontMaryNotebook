@@ -1,6 +1,7 @@
 import type { Routes } from "@angular/router"
 import { authGuard } from "./guard/auth.guard"
 import { noAuthGuard } from "./guard/no-auth.guard"
+import { AdminGuard } from "./guard/admin.guard"
 
 const routes: Routes = [
   {
@@ -42,6 +43,11 @@ const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import("./pages/editar-recuerdo/editar-recuerdo.page").then((m) => m.default),
   },
+  {
+    path: "admin",
+    canActivate: [authGuard],
+    loadComponent: () => import("./pages/admin/admin.page").then((m) => m.AdminPage),
+  }
 ]
 
 export { routes }

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
+
   /** Primary - Soft Lavender **/
   --ion-color-primary: #b8a0d6;
   --ion-color-primary-rgb: 184, 160, 214;
@@ -88,7 +89,6 @@
 * {
   font-family: var(--ion-font-family);
 }
-
 h1,
 h2,
 h3,
@@ -96,4 +96,25 @@ h4,
 h5,
 h6 {
   font-family: "Playfair Display", serif;
+}
+/* ===========================
+   DARK MODE
+   =========================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Backgrounds */
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18, 18, 18;
+
+    --ion-item-background: #1e1e1e;
+    --ion-card-background: #1e1e1e;
+
+    /* Text */
+    --ion-text-color: #f5f3f0;
+    --ion-text-color-rgb: 245, 243, 240;
+
+    /* Inputs */
+    --ion-placeholder-color: #aaaaaa;
+    --ion-border-color: #2c2c2c;
+  }
 }

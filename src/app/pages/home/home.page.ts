@@ -59,8 +59,8 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const nombre = this.authService.getUsuarioActual();
-    this.userName.set(nombre ?? "Invitado");
+    const usuario = this.authService.getUsuarioActual();
+    this.userName.set(usuario?.nombre ?? "Invitado");
 
     this.cargarRecuerdos()
 
@@ -73,8 +73,8 @@ export class HomePage implements OnInit {
   }
   ionViewWillEnter() {
     // Cada vez que vuelves a Home, recarga
-    const nombre = this.authService.getUsuarioActual();
-    this.userName.set(nombre ?? "Invitado");
+    const usuario = this.authService.getUsuarioActual();
+    this.userName.set(usuario?.nombre ?? "Invitado");
     this.currentPage = 0;
     this.recuerdos = [];
     this.cargarRecuerdos();
