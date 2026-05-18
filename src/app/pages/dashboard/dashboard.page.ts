@@ -2,23 +2,16 @@ import { Component,  OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import {
   IonContent,
-  IonInput,
   IonButton,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonIcon,
-  IonSpinner,
   IonButtons,
   IonRefresher,
   IonRefresherContent,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
-  IonTextarea,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
-  IonText,
   IonBadge
 } from "@ionic/angular/standalone"
 import  { Router } from "@angular/router"
@@ -35,23 +28,16 @@ import { Visibilidad } from "../../models/visibilidad.enum"
   imports: [
   CommonModule,
   IonContent,
-  IonInput,
   IonButton,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonIcon,
-  IonSpinner,
   IonButtons,
   IonRefresher,
   IonRefresherContent,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
-  IonTextarea,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
-  IonText,
   IonBadge],
 })
 export class DashboardPage implements OnInit {

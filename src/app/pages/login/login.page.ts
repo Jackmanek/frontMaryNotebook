@@ -22,17 +22,18 @@ import { LoginDTO } from "../../models/login-dto.model"
   styleUrls: ["./login.page.scss"],
   standalone: true,
   imports: [
-  IonContent,
-  IonInput,
-  IonButton,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonIcon,
-  IonSpinner,
-  IonButtons,
-  CommonModule,
-  FormsModule],
+    IonContent,
+    IonInput,
+    IonButton,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonIcon,
+    IonSpinner,
+    IonButtons,
+    CommonModule,
+    FormsModule
+  ],
 })
 export class LoginPage {
   loginData: LoginDTO = {
@@ -77,6 +78,10 @@ export class LoginPage {
 
   goToRegister(): void {
     this.router.navigate(["/register"])
+  }
+
+  goToForgotPassword(): void {
+    this.router.navigate(["/forgot-password"])
   }
 
   irAHome() {

@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common"
 import { AlertController } from "@ionic/angular"
 import {
   IonContent,
-  IonInput,
   IonButton,
   IonHeader,
   IonToolbar,
@@ -11,15 +10,6 @@ import {
   IonIcon,
   IonSpinner,
   IonButtons,
-  IonRefresher,
-  IonRefresherContent,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-  IonTextarea,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
-  IonText
 } from "@ionic/angular/standalone"
 import { ActivatedRoute, Router } from "@angular/router"
 import { RecuerdoService } from "../../services/recuerdo.service"
@@ -33,23 +23,13 @@ import { Recuerdo } from "../../models/recuerdo.model"
   imports: [
   CommonModule,
   IonContent,
-  IonInput,
   IonButton,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonIcon,
   IonSpinner,
-  IonButtons,
-  IonRefresher,
-  IonRefresherContent,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-  IonTextarea,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
-  IonText],
+  IonButtons],
 })
 export default class DetalleRecuerdoPage implements OnInit {
   recuerdo: Recuerdo | null = null

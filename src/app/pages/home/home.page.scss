@@ -154,3 +154,16 @@
     --border-radius: 24px;
   }
 }
+
+@media (max-width: 768px) {
+  ion-toolbar {
+    --padding-start: 4px;
+    --padding-end: 4px;
+  }
+
+  .mobile-title {
+    padding-left: 10px;
+    font-size: 1rem;
+    text-align: start;
+  }
+}

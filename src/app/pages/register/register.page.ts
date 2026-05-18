@@ -6,12 +6,8 @@ import {
   IonContent,
   IonInput,
   IonButton,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonIcon,
   IonSpinner,
-  IonButtons
 } from "@ionic/angular/standalone"
 import { AuthService } from "../../services/auth.service"
 import { RegistroUsuarioDTO } from "../../models/registro-usuario-dto.model"
@@ -25,12 +21,8 @@ import { RegistroUsuarioDTO } from "../../models/registro-usuario-dto.model"
   IonContent,
   IonInput,
   IonButton,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonIcon,
   IonSpinner,
-  IonButtons,
   CommonModule,
   FormsModule],
 })

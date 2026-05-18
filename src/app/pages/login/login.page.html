@@ -54,6 +54,12 @@
         </div>
       </div>
 
+      <div class="forgot-password-link">
+        <ion-button fill="clear" (click)="goToForgotPassword()" type="button" [disabled]="isLoading">
+          ¿Olvidaste tu contraseña?
+        </ion-button>
+      </div>
+
       <div class="error-message" *ngIf="errorMessage">
         <ion-icon name="alert-circle-outline"></ion-icon>
         <span>{{ errorMessage }}</span>

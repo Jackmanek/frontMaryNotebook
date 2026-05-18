@@ -1,15 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Recuerdos Públicos</ion-title>
+    <ion-title class="mobile-title">
+      Recuerdos Públicos
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="irADashboard()">
+      <ion-button (click)="irADashboard()" class="hidden sm:block">
         <ion-icon slot="icon-only" name="person-outline"></ion-icon>
       </ion-button>
       <span class="text-sm font-semibold hidden sm:inline px-1">{{ userName() }}</span>
-      <ion-button (click)="crearRecuerdo()">
+      <ion-button (click)="crearRecuerdo()" class="hidden sm:block">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()">
+      <ion-button (click)="logout()" class="hidden sm:block">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>

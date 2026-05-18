@@ -11,16 +11,11 @@ import {
   IonIcon,
   IonSpinner,
   IonButtons,
-  IonRefresher,
-  IonRefresherContent,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
   IonTextarea,
   IonSegment,
   IonSegmentButton,
   IonLabel,
-  IonText,
-  IonBadge
+  IonText
 } from "@ionic/angular/standalone"
 import  { Router } from "@angular/router"
 import  { RecuerdoService } from "../../services/recuerdo.service"
@@ -43,16 +38,11 @@ import { Visibilidad } from "../../models/visibilidad.enum"
   IonIcon,
   IonSpinner,
   IonButtons,
-  IonRefresher,
-  IonRefresherContent,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
   IonTextarea,
   IonSegment,
   IonSegmentButton,
   IonLabel,
-  IonText,
-  IonBadge],
+  IonText],
 })
 export default class CrearRecuerdoPage {
   texto = ""

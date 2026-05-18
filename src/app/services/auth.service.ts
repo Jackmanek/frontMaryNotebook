@@ -14,6 +14,14 @@ interface JwtPayload {
   email?: string;
   exp?: number;
 }
+export interface ForgotPasswordDTO {
+  email: string;
+}
+
+export interface ResetPasswordDTO {
+  token: string;
+  nuevaPassword: string;
+}
 
 
 @Injectable({
@@ -37,6 +45,14 @@ export class AuthService {
         this.tokenSubject.next(token)
       }),
     )
+  }
+
+  forgotPassword(dto: ForgotPasswordDTO): Observable<string> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, dto, { responseType: "text" })
+  }
+
+  resetPassword(dto: ResetPasswordDTO): Observable<string> {
+    return this.http.post(`${this.apiUrl}/reset-password`, dto, { responseType: "text" })
   }
 
   logout(): void {

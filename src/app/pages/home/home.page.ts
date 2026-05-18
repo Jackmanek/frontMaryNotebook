@@ -2,13 +2,11 @@ import { Component,  OnInit, signal } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import {
   IonContent,
-  IonInput,
   IonButton,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonIcon,
-  IonSpinner,
   IonButtons,
   IonRefresher,
   IonRefresherContent,
@@ -27,13 +25,11 @@ import  { RecuerdoTimelineDTO } from "../../models/recuerdo-timeline-dto.model"
   standalone: true,
   imports: [
   IonContent,
-  IonInput,
   IonButton,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonIcon,
-  IonSpinner,
   IonButtons,
   IonRefresher,
   IonRefresherContent,
