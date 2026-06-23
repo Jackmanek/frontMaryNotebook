@@ -1,4 +1,4 @@
-# MaryNotebook
+# MaryNotebookFront
 
 MaryNotebook es una aplicación de gestión personalizada que permite a los usuarios crear, organizar y compartir recuerdos. La plataforma ofrece funcionalidades avanzadas para la administración de usuarios y recuerdos, incluyendo la posibilidad de agregar etiquetas, establecer visibilidad y gestionar imágenes.
 
