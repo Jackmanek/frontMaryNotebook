@@ -14,11 +14,10 @@ MaryNotebook es una aplicación de gestión personalizada que permite a los usua
 ---
 ## 🛠️ Tecnologías Utilizadas
 
-- **Backend**: Spring Boot (Java 17+), Hibernate, MySQL
+- **Backend**: Spring Boot (Java 17+), Hibernate, Oracle Cloud (capa gratuita)
 - **Frontend**: Angular/Ionic
-- **Base de Datos**: MySQL
+- **Base de Datos**: Oracle cloud (capa gratuita )
 - **Autenticación**: JWT
-- **Pruebas Unitarias y de Integración**: JUnit 5, Mockito, Pytest, PHPUnit
 
 ---
 ---
@@ -28,7 +27,7 @@ MaryNotebook es una aplicación de gestión personalizada que permite a los usua
 
 - Java 17+
 - Node.js (para el frontend)
-- MySQL
+- Oracle
 
 ---
 ### 📥 Pasos para la Instalación
@@ -41,25 +40,4 @@ MaryNotebook es una aplicación de gestión personalizada que permite a los usua
 2. **🔧Configurar las Variables de Entorno**:
    - Crear un archivo `.env` en la raíz del proyecto.
    - Configurar las variables de entorno necesarias, como `API_URL`, `DB_HOST`, `DB_PORT`, etc.
-
-3. **📦Instalar Dependencias**:
-   ```bash
-   # Instalar dependencias backend (Spring Boot)
-   ./gradlew build
-
-   # Instalar dependencias frontend (Angular/Ionic)
-   cd android/app/src/main/assets/www
-   npm install
-   ```
-
-4. **▶️ Ejecutar la Aplicación**:
-   - **Backend**:
-     ```bash
-     ./gradlew bootRun
-     ```
-   - **Frontend**:
-     ```bash
-     cd android/app/src/main/assets/www
-     ng serve
-     ```
 
